@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block navlinks %}
+    <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/cart">Cart</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link">Details <span class="sr-only">(current)</span></a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <div class="container rounded mt-5 mb-5 header">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-10 m-3 mx-auto">
+                <h1>{{ pen.inkColour.capitalize() }} {{ pen.style.capitalize() }} Pen</h1>
+                <h3>{{ pen.slogan }}</h3>
+                <img class="image-border" src="{{ url_for('static', filename='img/'+pen.image) }}" alt="{{ pen.inkColour.capitalize() }} {{ pen.style.capitalize() }} Pen" width="100%">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-10">
+                <p>{{ pen.description }}</p>    
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-10 m-3">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Ink Colour</th>
+                            <th scope="col">Diameter</th>
+                            <th scope="col">Comfort</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>{{ pen.inkColour.capitalize() }}</td>
+                        <td>{{ pen.diameter }} mm</td>
+                        <td>{{ pen.comfort }}</td>
+                        <td><b>{{ "${:,.2f}".format(pen.price) }}</b></td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-10">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-8 mb-3 mx-auto">
+                        <form action="/", method="GET"></form>
+                        <button type="submit" class="btn btn-primary btn-block" style="height: 45px">Return</button>
+                    </div>
+                    <div class="col-md col-0">
+                         <!-- Empty column for formatting -->
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-8 mb-3 mx-auto">
+                        <form action="/cart", method="POST">
+                            <input type="hidden" name="penId" value="{{ pen.id }}">
+                            <button type="submit" class="btn btn-success btn-block" style="height: 45px">Add to cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
