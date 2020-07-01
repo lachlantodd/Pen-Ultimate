@@ -1,4 +1,4 @@
-#Penultimate - The ultimate pen specialist
+# Pen Ultimate - The Ultimate Pen Specialist
 
 This project is an ecommerce website for pens.
 
